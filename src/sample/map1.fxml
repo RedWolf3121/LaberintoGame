@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="387.0" prefWidth="706.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Group fx:id="paredes">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#10e5699e" height="52.0" layoutX="655.0" layoutY="62.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="254.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" width="14.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="70.0" layoutX="149.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" width="14.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="149.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" width="455.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="110.0" layoutX="149.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="14.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="335.0" layoutY="218.0" stroke="BLACK" strokeType="INSIDE" width="333.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="149.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="519.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="590.0" layoutY="274.0" stroke="BLACK" strokeType="INSIDE" width="14.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="87.0" layoutY="62.0" stroke="BLACK" strokeType="INSIDE" width="583.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="87.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="577.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="254.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" width="352.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="352.0" layoutX="81.0" layoutY="62.0" stroke="BLACK" strokeType="INSIDE" width="14.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="149.0" layoutY="271.0" stroke="BLACK" strokeType="INSIDE" width="455.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="301.0" layoutX="655.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="14.0">
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="#c90c0c" offset="0.11683848797250858" />
+                              <Stop color="#725c5c" offset="0.2577319587628866" />
+                              <Stop color="#e1caca" offset="0.35395189003436417" />
+                              <Stop color="WHITE" offset="0.42955326460481097" />
+                              <Stop color="#e15c5c" offset="0.8885728956827428" />
+                              <Stop color="#f29393" offset="0.9961685823754789" />
+                              <Stop color="#f29393" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill></Rectangle>
+               </children>
+            </Group>
+            <Label layoutX="27.0" layoutY="23.0" prefHeight="27.0" prefWidth="48.0" />
+            <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label layoutX="101.0" layoutY="23.0" prefHeight="27.0" prefWidth="48.0" />
+            <Text layoutX="102.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
