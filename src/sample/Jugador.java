@@ -13,14 +13,14 @@ public class Jugador {
     private Image imgJugadorRight;
     private Image imgJugadorLeft;
     private boolean ganador;
-    private Integer puntaje;
+    public Integer puntaje;
 
     public Jugador(){
         puntaje = 0;
-        imgJugadorFront = new Image("resources/spriteleft.png");
-        imgJugadorBack = new Image("resources/spriteright.png");
-        imgJugadorRight = new Image("resources/spriteright.png");
-        imgJugadorLeft = new Image("resources/spriteleft.png");
+        imgJugadorFront = new Image("resources/fail/pre_fail/spriteleft.png");
+        imgJugadorBack = new Image("resources/fail/pre_fail/spriteright.png");
+        imgJugadorRight = new Image("resources/fail/pre_fail/spriteright.png");
+        imgJugadorLeft = new Image("resources/fail/pre_fail/spriteleft.png");
 
     }
 

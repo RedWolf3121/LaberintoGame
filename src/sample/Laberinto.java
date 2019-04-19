@@ -26,36 +26,38 @@ public class Laberinto {
     private Rectangle llegada;
     private List<Rectangle> paredes;
     private List<ImageView> listaMonedas;
+    int puntos = 0;
 
 
 
+    int[][] tiles = {
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1},
+            {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1},
+            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,1,1,1,0,0,1},
+            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,0,0,1,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,1,1,1,1,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    };
 
-//    int[][] tiles = {
-//            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1},
-//            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//            {1,1,1,1,1,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-//    };
+
 
 
     int tileSize = 20;
@@ -68,44 +70,44 @@ public class Laberinto {
 //            paredes.add(new Rectangle(listaX[i], listaY[i], listaAncho[i], listaAlto[i]));
 //        }
 
-        File mapFile = new File("lab1");
-        FileReader fileReader = new FileReader(mapFile);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        File mapFile = new File("lab1");
+//        FileReader fileReader = new FileReader(mapFile);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        try {
-            String line;
-            while((line = bufferedReader.readLine()) != null) {
-                for (int i = 0; i < mapFile.length(); i++) {
-                    for (int j = 0; j < mapFile.length(); j++) {
-                        if (line == " ") {
-                            paredes.add(new Rectangle(j * tileSize, i * tileSize, tileSize, tileSize));
-                        }
-                    }
-                }
-//                if (line == "F") {
-//                    pintarLineaJugable();
-//                } else if (line == " ") {
-//                    paredes.add(new Rectangle(j*tileSize, i*tileSize, tileSize, tileSize));
+//        try {
+//            String line;
+//            while((line = bufferedReader.readLine()) != null) {
+//                for (int i = 0; i < mapFile.length(); i++) {
+//                    for (int j = 0; j < mapFile.length(); j++) {
+//                        if (line == " ") {
+//                            paredes.add(new Rectangle(j * tileSize, i * tileSize, tileSize, tileSize));
+//                        }
+//                    }
 //                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-//        for (int i = 0; i <tiles.length ; i++) {
-//            for (int j = 0; j <tiles[i].length ; j++) {
-//                if (tiles[i][j] == 1){
-//                    //paredes.add(gc.drawImage(imgtile, j*tileSize, i*tileSize));
-//                    paredes.add(new Rectangle(j*tileSize, i*tileSize, tileSize, tileSize));
-//                } else if(tiles[i][j] == 2){
-//                    inicio  = new Rectangle(j*tileSize,i*tileSize,tileSize,tileSize);
-//                    inicio.setFill(Color.GREENYELLOW);
-//                }  else if(tiles[i][j] == 3){
-//                    llegada  = new Rectangle(j*tileSize,i*tileSize,tileSize,tileSize);
-//                    llegada.setFill(Color.GREENYELLOW);
-//                }
+////                if (line == "F") {
+////                    pintarLineaJugable();
+////                } else if (line == " ") {
+////                    paredes.add(new Rectangle(j*tileSize, i*tileSize, tileSize, tileSize));
+////                }
 //            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
+
+        for (int i = 0; i <tiles.length ; i++) {
+            for (int j = 0; j <tiles[i].length ; j++) {
+                if (tiles[i][j] == 1){
+                    //paredes.add(gc.drawImage(imgtile, j*tileSize, i*tileSize));
+                    paredes.add(new Rectangle(j*tileSize, i*tileSize, tileSize, tileSize));
+                } else if(tiles[i][j] == 2){
+                    inicio  = new Rectangle(j*tileSize,i*tileSize,tileSize,tileSize);
+                    inicio.setFill(Color.GREENYELLOW);
+                }  else if(tiles[i][j] == 3){
+                    llegada  = new Rectangle(j*tileSize,i*tileSize,tileSize,tileSize);
+                    llegada.setFill(Color.GREENYELLOW);
+                }
+            }
+        }
 
     }
 
@@ -197,6 +199,9 @@ public class Laberinto {
         for(ImageView moneda : listaMonedas) {
             if(imgView.getBoundsInParent().intersects(moneda.getBoundsInParent()) && moneda.isVisible()){
                 moneda.setVisible(false);
+                puntos++;
+
+                System.out.println(puntos);
                 return true;
             }
         }

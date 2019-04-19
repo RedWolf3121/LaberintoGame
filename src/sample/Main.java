@@ -6,16 +6,10 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.noUtilizado.EndGameScreen;
 
 import java.io.FileNotFoundException;
 
@@ -125,7 +120,7 @@ public class Main extends Application {
 
             switch(evt.getCode()) {
                 case UP:
-                    System.out.println("Chiqui para arriba!");
+
                     imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()-5);
                     imgViewChiqui.setImage(chiqui.getImgJugadorBack());
 
@@ -134,7 +129,7 @@ public class Main extends Application {
                     }
                     break;
                 case DOWN:
-                    System.out.println("Chiqui para abajo!");
+
                     imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()+5);
                     imgViewChiqui.setImage(chiqui.getImgJugadorFront());
 
@@ -144,7 +139,6 @@ public class Main extends Application {
 
                     break;
                 case LEFT:
-                    System.out.println("Chiqui para la izquierda!");
                     imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()-5);
                     imgViewChiqui.setImage (chiqui.getImgJugadorLeft());
 
@@ -153,7 +147,6 @@ public class Main extends Application {
                     }
                     break;
                 case RIGHT:
-                    System.out.println("Chiqui para la derecha!");
                     imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()+5);
                     imgViewChiqui.setImage (chiqui.getImgJugadorRight());
 
@@ -165,7 +158,7 @@ public class Main extends Application {
             if(laberinto1.monedaObtenida(imgViewChiqui)) {
                 chiqui.setPuntaje(chiqui.getPuntaje() + 1);
             }
-            System.out.println("(" + imgViewChiqui.getTranslateX() + ", " + imgViewChiqui.getTranslateY() + ")");
+            //System.out.println("(" + imgViewChiqui.getTranslateX() + ", " + imgViewChiqui.getTranslateY() + ")");
         });
 
         primaryStage.setTitle("Laberinto!");
