@@ -20,22 +20,13 @@ public class Laberinto {
     private List<Rectangle> paredes;
     private List<ImageView> listaMonedas;
     private int puntos = 0;
-
-
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
-    }
+    private boolean timeOver;
 
 
 
 
 
     int[][] tiles = {
-
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1},
             {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -129,6 +120,17 @@ public class Laberinto {
         this.jugador = jugador;
     }
 
+    public int getPuntos() {
+        return puntos;
+    }
+    public boolean isTimeOver() {
+        return timeOver;
+    }
+
+    public void setTimeOver(boolean timeOver) {
+        this.timeOver = timeOver;
+    }
+
     /**
      * Genera las posiciones de las monedas dentro del laberinto
      * de forma aleatoria
@@ -178,11 +180,9 @@ public class Laberinto {
             if(imgView.getBoundsInParent().intersects(moneda.getBoundsInParent()) && moneda.isVisible()){
                 moneda.setVisible(false);
 
-                getPuntos();
                 puntos++;
-                setPuntos(this.puntos);
 
-                System.out.println(puntos);
+                System.out.println("Puntos: " + puntos);
                 return true;
             }
         }

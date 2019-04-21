@@ -29,13 +29,14 @@ public class Main extends Application {
 
     private Label lblTiempo = new Label();
     private Label lblPoints = new Label();
+    private Label lblFinalText = new Label();
     private Timeline timeline = new Timeline();
-    private static final Integer TIEMPO = 60;
+    private static final Integer TIEMPO = 50;
     private IntegerProperty segundos = new SimpleIntegerProperty(TIEMPO);
     private boolean comienzaJuego = false;
     private boolean terminado = false;
-    int puntos;
-
+    private int puntos;
+    Group panel = new Group();
 
 
     @Override
@@ -51,32 +52,19 @@ public class Main extends Application {
         imgViewChiqui.setTranslateY(10);
 
         lblTiempo.textProperty().bind(segundos.asString());
-        lblTiempo.setTextFill(Color.RED);
+        lblTiempo.setTextFill(Color.BLUE);
         lblTiempo.setStyle("-fx-font-size: 4em;");
         segundos.set(TIEMPO);
-
-        puntos = laberinto1.getPuntos();
-        lblPoints.setText("Points" + puntos);
-        lblPoints.setTextFill(Color.RED);
-        lblPoints.setStyle("-fx-font-size: 4em;");
+        lblTiempo.setTranslateY(500);
+        lblTiempo.setTranslateX(800);
 
 
 
-        Group panel = new Group();
 
 
         // Asocia el jugador al laberinto
         laberinto1.setJugador(chiqui);
 
-        // Crea el inicio
-//        Rectangle inicio = new Rectangle(300,60,60,10);
-//        inicio.setFill(Color.GREENYELLOW);
-//        laberinto1.setInicio(inicio);
-
-        // Crea la llegada
-//        Rectangle llegada = new Rectangle(300,580,60,10);
-//        llegada.setFill(Color.GREENYELLOW);
-//        laberinto1.setLlegada(llegada);
 
         panel.getChildren().add(laberinto1.getInicio());
         panel.getChildren().add(laberinto1.getLlegada());
@@ -106,6 +94,15 @@ public class Main extends Application {
                 timeline.setOnFinished((ActionEvent fin)->{
                     System.out.println("Se acabó el tiempo!!!!!!");
                     chiqui.setGanador(false);
+                    laberinto1.setTimeOver(true);
+
+                    lblFinalText.setText("Time is Over");
+                    lblFinalText.setTextFill(Color.RED);
+                    lblFinalText.setStyle("-fx-font-size: 6em;");
+                    lblFinalText.setTranslateY(200);
+                    lblFinalText.setTranslateX(240);
+                    panel.getChildren().add(lblFinalText);
+
                     try {
                         Stage stg = new Stage();
                         stg.setUserData(chiqui);
@@ -119,55 +116,66 @@ public class Main extends Application {
                 timeline.stop();
                 terminado = true;
                 chiqui.setGanador(true);
+                lblFinalText.setText("Winner");
+                lblFinalText.setTextFill(Color.GREEN);
+                lblFinalText.setStyle("-fx-font-size: 6em;");
+                lblFinalText.setTranslateY(200);
+                lblFinalText.setTranslateX(250);
+                panel.getChildren().add(lblFinalText);
                 try {
                     Stage stg = new Stage();
                     stg.setUserData(chiqui);
                 } catch (Exception ex) {
                 }
-                System.exit(0);
+
             }
+            if (laberinto1.isTimeOver() == false && terminado == false){
+                switch(evt.getCode()) {
+                    case UP:
 
-            switch(evt.getCode()) {
-                case UP:
-
-                    imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()-5);
-                    imgViewChiqui.setImage(chiqui.getImgJugadorBack());
-
-                    if(laberinto1.comprobarColision(imgViewChiqui)) {
-                        imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()+5);
-                    }
-                    break;
-                case DOWN:
-
-                    imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()+5);
-                    imgViewChiqui.setImage(chiqui.getImgJugadorFront());
-
-                    if(laberinto1.comprobarColision(imgViewChiqui)) {
                         imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()-5);
-                    }
+                        imgViewChiqui.setImage(chiqui.getImgJugadorBack());
 
-                    break;
-                case LEFT:
-                    imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()-5);
-                    imgViewChiqui.setImage (chiqui.getImgJugadorLeft());
+                        if(laberinto1.comprobarColision(imgViewChiqui)) {
+                            imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()+5);
+                        }
+                        break;
+                    case DOWN:
 
-                    if(laberinto1.comprobarColision(imgViewChiqui)) {
-                        imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()+5);
-                    }
-                    break;
-                case RIGHT:
-                    imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()+5);
-                    imgViewChiqui.setImage (chiqui.getImgJugadorRight());
+                        imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()+5);
+                        imgViewChiqui.setImage(chiqui.getImgJugadorFront());
 
-                    if(laberinto1.comprobarColision(imgViewChiqui)) {
+                        if(laberinto1.comprobarColision(imgViewChiqui)) {
+                            imgViewChiqui.setTranslateY(imgViewChiqui.getTranslateY()-5);
+                        }
+
+                        break;
+                    case LEFT:
                         imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()-5);
-                    }
-                    break;
+                        imgViewChiqui.setImage (chiqui.getImgJugadorLeft());
+
+                        if(laberinto1.comprobarColision(imgViewChiqui)) {
+                            imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()+5);
+                        }
+                        break;
+                    case RIGHT:
+                        imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()+5);
+                        imgViewChiqui.setImage (chiqui.getImgJugadorRight());
+
+                        if(laberinto1.comprobarColision(imgViewChiqui)) {
+                            imgViewChiqui.setTranslateX(imgViewChiqui.getTranslateX()-5);
+                        }
+                        break;
+                }
+                puntos = laberinto1.getPuntos();
+                lblPoints.setText("Points " + puntos);
+                lblPoints.setTextFill(Color.BLUE);
+                lblPoints.setStyle("-fx-font-size: 4em;");
+                lblPoints.setTranslateY(500);
             }
             if(laberinto1.monedaObtenida(imgViewChiqui)) {
                 chiqui.setPuntaje(chiqui.getPuntaje() + 1);
             }
-            //System.out.println("(" + imgViewChiqui.getTranslateX() + ", " + imgViewChiqui.getTranslateY() + ")");
         });
 
         primaryStage.setTitle("Laberinto!");
@@ -176,9 +184,16 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+    public void render() throws FileNotFoundException {
+        Laberinto lab = new Laberinto();
+        puntos = lab.getPuntos();
+        lblPoints.setText("Points " + puntos);
+        lblPoints.setTextFill(Color.BLUE);
+        lblPoints.setStyle("-fx-font-size: 4em;");
+        lblPoints.setTranslateY(500);
+        panel.getChildren().add(lblPoints);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
