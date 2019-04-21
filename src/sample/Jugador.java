@@ -10,7 +10,7 @@ public class Jugador {
     private Image imgJugadorRight;
     private Image imgJugadorLeft;
     private boolean ganador;
-    public Integer puntaje;
+    private Integer puntaje;
 
     public Jugador(){
         puntaje = 0;

@@ -21,21 +21,20 @@ import javafx.util.Duration;
 import java.io.FileNotFoundException;
 
 
-/**
- *
- * @author ener2
- */
 public class Main extends Application {
 
     private Label lblTiempo = new Label();
     private Label lblPoints = new Label();
+    private Label lblVidas = new Label();
+    private Label lblTextDead = new Label();
     private Label lblFinalText = new Label();
     private Timeline timeline = new Timeline();
     private static final Integer TIEMPO = 50;
-    private IntegerProperty segundos = new SimpleIntegerProperty(TIEMPO);
+    protected IntegerProperty segundos = new SimpleIntegerProperty(TIEMPO);
     private boolean comienzaJuego = false;
     private boolean terminado = false;
     private int puntos;
+    private int vidas;
     Group panel = new Group();
 
 
@@ -51,17 +50,6 @@ public class Main extends Application {
         imgViewChiqui.setTranslateX(325);
         imgViewChiqui.setTranslateY(10);
 
-        lblTiempo.textProperty().bind(segundos.asString());
-        lblTiempo.setTextFill(Color.BLUE);
-        lblTiempo.setStyle("-fx-font-size: 4em;");
-        segundos.set(TIEMPO);
-        lblTiempo.setTranslateY(500);
-        lblTiempo.setTranslateX(800);
-
-
-
-
-
         // Asocia el jugador al laberinto
         laberinto1.setJugador(chiqui);
 
@@ -72,9 +60,12 @@ public class Main extends Application {
             panel.getChildren().add(rect);
         }
         panel.getChildren().addAll(laberinto1.generarMonedas());
+        panel.getChildren().addAll(laberinto1.generarBombas());
         panel.getChildren().add(imgViewChiqui);
         panel.getChildren().add(lblTiempo);
         panel.getChildren().add(lblPoints);
+        panel.getChildren().add(lblVidas);
+        panel.getChildren().add(lblTextDead);
         Scene scene = new Scene(panel, 900, 600);
 
         scene.setOnMouseClicked((MouseEvent evt ) -> {
@@ -118,7 +109,7 @@ public class Main extends Application {
                 chiqui.setGanador(true);
                 lblFinalText.setText("Winner");
                 lblFinalText.setTextFill(Color.GREEN);
-                lblFinalText.setStyle("-fx-font-size: 6em;");
+                lblFinalText.setStyle("-fx-font-size: 9em;");
                 lblFinalText.setTranslateY(200);
                 lblFinalText.setTranslateX(250);
                 panel.getChildren().add(lblFinalText);
@@ -129,7 +120,7 @@ public class Main extends Application {
                 }
 
             }
-            if (laberinto1.isTimeOver() == false && terminado == false){
+            if (laberinto1.isTimeOver() == false && terminado == false  && laberinto1.getVidas()>=1){
                 switch(evt.getCode()) {
                     case UP:
 
@@ -172,9 +163,33 @@ public class Main extends Application {
                 lblPoints.setTextFill(Color.BLUE);
                 lblPoints.setStyle("-fx-font-size: 4em;");
                 lblPoints.setTranslateY(500);
+
+                vidas = laberinto1.getVidas();
+                lblVidas.setText("Vidas " + vidas);
+                lblVidas.setTextFill(Color.LIGHTGREEN);
+                lblVidas.setStyle("-fx-font-size: 4em;");
+                lblVidas.setTranslateY(500);
+                lblVidas.setTranslateX(350);
+
+                lblTiempo.textProperty().bind(segundos.asString());
+                lblTiempo.setTextFill(Color.BLUE);
+                lblTiempo.setStyle("-fx-font-size: 4em;");
+                segundos.set(TIEMPO);
+                lblTiempo.setTranslateY(500);
+                lblTiempo.setTranslateX(800);
             }
             if(laberinto1.monedaObtenida(imgViewChiqui)) {
                 chiqui.setPuntaje(chiqui.getPuntaje() + 1);
+            }
+            if(laberinto1.bombaObtenida(imgViewChiqui)) {
+                chiqui.setPuntaje(chiqui.getPuntaje() + 1);
+            }
+            if (laberinto1.getVidas() == 0){
+                lblTextDead.setText("\n" + "you have died stronzo");
+                lblTextDead.setTextFill(Color.RED);
+                lblTextDead.setStyle("-fx-font-size: 6em;");
+                lblTextDead.setTranslateY(100);
+                lblTextDead.setTranslateX(130);
             }
         });
 
@@ -184,15 +199,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void render() throws FileNotFoundException {
-        Laberinto lab = new Laberinto();
-        puntos = lab.getPuntos();
-        lblPoints.setText("Points " + puntos);
-        lblPoints.setTextFill(Color.BLUE);
-        lblPoints.setStyle("-fx-font-size: 4em;");
-        lblPoints.setTranslateY(500);
-        panel.getChildren().add(lblPoints);
-    }
 
     public static void main(String[] args) {
         launch(args);
