@@ -1,24 +1,17 @@
 package sample;
 
-import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import sample.Jugador;
 
-/**
- *
- * @author ener2
- */
+
 public class Laberinto {
     private Image imgtile;
     private Jugador jugador;
@@ -26,73 +19,58 @@ public class Laberinto {
     private Rectangle llegada;
     private List<Rectangle> paredes;
     private List<ImageView> listaMonedas;
-    int puntos = 0;
+    private int puntos = 0;
+
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+
 
 
 
     int[][] tiles = {
+
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1},
             {1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
             {1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
             {1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
             {1,0,0,1,0,0,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
             {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
             {1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1},
-            {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1},
-            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,1,1,1,0,0,1},
+            {1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+            {1,0,0,0,0,0,1,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1},
+            {1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
             {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
-            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
-            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
-            {1,0,0,1,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,1,1,1,1,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+            {1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
+            {1,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,1},
+            {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,1,1,1},
     };
-
 
 
 
     int tileSize = 20;
 
     public Laberinto() throws FileNotFoundException {
-        imgtile = new Image("resources/ground5.png");
+
         listaMonedas = new ArrayList<>();
         paredes = new ArrayList<>();
-//        for (int i = 0; i < listaX.length; i++) {
-//            paredes.add(new Rectangle(listaX[i], listaY[i], listaAncho[i], listaAlto[i]));
-//        }
 
-//        File mapFile = new File("lab1");
-//        FileReader fileReader = new FileReader(mapFile);
-//        BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-//        try {
-//            String line;
-//            while((line = bufferedReader.readLine()) != null) {
-//                for (int i = 0; i < mapFile.length(); i++) {
-//                    for (int j = 0; j < mapFile.length(); j++) {
-//                        if (line == " ") {
-//                            paredes.add(new Rectangle(j * tileSize, i * tileSize, tileSize, tileSize));
-//                        }
-//                    }
-//                }
-////                if (line == "F") {
-////                    pintarLineaJugable();
-////                } else if (line == " ") {
-////                    paredes.add(new Rectangle(j*tileSize, i*tileSize, tileSize, tileSize));
-////                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         for (int i = 0; i <tiles.length ; i++) {
             for (int j = 0; j <tiles[i].length ; j++) {
@@ -161,8 +139,8 @@ public class Laberinto {
         Random generador = new Random();
 
         for (int i = 1; i<=20; i++){
-            Double coordX = 1000 * generador.nextDouble() % (570 - 25) + 25;
-            Double coordY = 1000 * generador.nextDouble() % (570 - 75) + 75;
+            Double coordX = 1000 * generador.nextDouble() % (420 - 25) + 25;
+            Double coordY = 1000 * generador.nextDouble() % (420 - 75) + 75;
             ImageView imgViewMoneda = new ImageView (moneda);
             imgViewMoneda.setTranslateX(coordX);
             imgViewMoneda.setTranslateY(coordY);
@@ -199,7 +177,10 @@ public class Laberinto {
         for(ImageView moneda : listaMonedas) {
             if(imgView.getBoundsInParent().intersects(moneda.getBoundsInParent()) && moneda.isVisible()){
                 moneda.setVisible(false);
+
+                getPuntos();
                 puntos++;
+                setPuntos(this.puntos);
 
                 System.out.println(puntos);
                 return true;

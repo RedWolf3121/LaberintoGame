@@ -2,10 +2,7 @@ package sample;
 
 import javafx.scene.image.Image;
 
-/**
- *
- * @author ener2
- */
+
 public class Jugador {
 
     private Image imgJugadorFront;
@@ -17,10 +14,10 @@ public class Jugador {
 
     public Jugador(){
         puntaje = 0;
-        imgJugadorFront = new Image("resources/fail/pre_fail/spriteleft.png");
-        imgJugadorBack = new Image("resources/fail/pre_fail/spriteright.png");
-        imgJugadorRight = new Image("resources/fail/pre_fail/spriteright.png");
-        imgJugadorLeft = new Image("resources/fail/pre_fail/spriteleft.png");
+        imgJugadorFront = new Image("resources/spriteleft.png");
+        imgJugadorBack = new Image("resources/spriteright.png");
+        imgJugadorRight = new Image("resources/spriteright.png");
+        imgJugadorLeft = new Image("resources/spriteleft.png");
 
     }
 

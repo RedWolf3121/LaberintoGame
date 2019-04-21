@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sample.noUtilizado.EndGameScreen;
 
 import java.io.FileNotFoundException;
 
@@ -29,17 +28,23 @@ import java.io.FileNotFoundException;
 public class Main extends Application {
 
     private Label lblTiempo = new Label();
+    private Label lblPoints = new Label();
     private Timeline timeline = new Timeline();
     private static final Integer TIEMPO = 60;
     private IntegerProperty segundos = new SimpleIntegerProperty(TIEMPO);
     private boolean comienzaJuego = false;
     private boolean terminado = false;
+    int puntos;
+
 
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
 
         Jugador chiqui = new Jugador();
+
+        //Crea el Laberinto con las paredes
+        Laberinto laberinto1 = new Laberinto();
 
         ImageView imgViewChiqui = new ImageView(chiqui.getImgJugadorFront());
         imgViewChiqui.setTranslateX(325);
@@ -50,10 +55,15 @@ public class Main extends Application {
         lblTiempo.setStyle("-fx-font-size: 4em;");
         segundos.set(TIEMPO);
 
+        puntos = laberinto1.getPuntos();
+        lblPoints.setText("Points" + puntos);
+        lblPoints.setTextFill(Color.RED);
+        lblPoints.setStyle("-fx-font-size: 4em;");
+
+
+
         Group panel = new Group();
 
-        //Crea el Laberinto con las paredes
-        Laberinto laberinto1 = new Laberinto();
 
         // Asocia el jugador al laberinto
         laberinto1.setJugador(chiqui);
@@ -76,8 +86,8 @@ public class Main extends Application {
         panel.getChildren().addAll(laberinto1.generarMonedas());
         panel.getChildren().add(imgViewChiqui);
         panel.getChildren().add(lblTiempo);
-
-        Scene scene = new Scene(panel, 600, 600);
+        panel.getChildren().add(lblPoints);
+        Scene scene = new Scene(panel, 900, 600);
 
         scene.setOnMouseClicked((MouseEvent evt ) -> {
             System.out.println("Click!");
@@ -99,7 +109,6 @@ public class Main extends Application {
                     try {
                         Stage stg = new Stage();
                         stg.setUserData(chiqui);
-                        new EndGameScreen().start(stg);
                     } catch (Exception ex) {
                     }
                 });
@@ -113,9 +122,9 @@ public class Main extends Application {
                 try {
                     Stage stg = new Stage();
                     stg.setUserData(chiqui);
-                    new EndGameScreen().start(stg);
                 } catch (Exception ex) {
                 }
+                System.exit(0);
             }
 
             switch(evt.getCode()) {
@@ -175,114 +184,3 @@ public class Main extends Application {
     }
 
 }
-
-
-//package sample;
-//
-//import javafx.animation.AnimationTimer;
-//import javafx.application.Application;
-//import javafx.scene.Group;
-//import javafx.scene.Scene;
-//import javafx.scene.canvas.Canvas;
-//import javafx.scene.canvas.GraphicsContext;
-//import javafx.scene.image.Image;
-//import javafx.stage.Stage;
-//
-//import java.util.ArrayList;
-//
-//public class Main extends Application {
-//
-//    int X = 60;
-//    int Y = 60;
-//
-//    @Override
-//    public void start(Stage stage) throws Exception {
-//        Group root = new Group();
-//        Scene sc = new Scene( root );
-//        stage.setScene( sc );
-//
-//        Canvas canvas = new Canvas( 600 , 600 );
-//        root.getChildren().add( canvas );
-//
-//        ArrayList<String> input = new ArrayList<String>();
-//
-//        sc.setOnKeyPressed(
-//                e -> {
-//                    String code = e.getCode().toString();
-//
-//                    // only add once... prevent duplicates
-//                    if ( !input.contains(code) )
-//                        input.add( code );
-//                });
-//
-//        sc.setOnKeyReleased(
-//                e -> {
-//                    String code = e.getCode().toString();
-//                    input.remove( code );
-//                });
-//
-//        GraphicsContext gc = canvas.getGraphicsContext2D();
-//
-//        Image left = new Image( "resources/spriteleft.png" );
-//        Image right = new Image( "resources/spriteright.png" );
-//
-//        new AnimationTimer()
-//        {
-//            public void handle(long currentNanoTime)
-//            {
-//                // Clear the canvas
-//                gc.clearRect(0,0, 600, 600);
-//                gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
-////                gc.fillRect(10, 100, 10, 480);
-////                gc.fillRect(580, 100, 10, 480-right.getWidth());
-////                gc.fillRect(10, 100, 580, 10);
-////                gc.fillRect(10, 580, 580, 10);
-//
-//                int[] listaX = {10,10,360,10,380,300,300,200,520,10,40,210,330,10,60,60,80,120,10,260,95,500,440,500,590,545,70,10,350,10,10,350,260,555,500,510,360};
-//                int[] listaY = {60,60,60,120,390,180,180,290,500,350,440,480,120,350,180,180,440,450,580,350,240,320,250,230,60,60,390,330,380,280,580,500,120,120,460,450,580};
-//                int[] anchos = {300,10,240,180,180,100,230,160,80,150,120,120,160,200,190,10,220,10,50,150,170,10,10,10,10,10,10,10,10,10,300,70,10,10,10,20,240};
-//                int[] largos = {10,300,10,10,10,10,10,10,10,10,10,10,10,10,10,130,10,100,10,10,10,20,250,130,500,10,100,100,40,290,10,10,290,330,100,10,10,500};
-//
-//                Laberinto laberinto1 = new Laberinto(listaX, listaY, anchos, largos);
-//
-//                if (input.contains("LEFT")) {
-//                    X--;
-//                    if (X <= 0) {
-//                        gc.drawImage(left, X++, Y);
-//                    } else {
-//                    System.out.println("x:"+X);
-//                        gc.drawImage(left, X, Y);
-//                    }
-//                } else if (input.contains("RIGHT")) {
-//                    X++;
-//                    //if (X >= ) {
-//                   // gc.drawImage(right, X--, Y);
-//                   // } else {
-//                        System.out.println("x:" + X);
-//                        gc.drawImage(right, X, Y);
-//                   // }
-//                } else if (input.contains("UP")) {
-//                    Y--;
-//                    gc.drawImage(left, X, Y);
-//                } else if (input.contains("DOWN")) {
-//                    Y++;
-//                    gc.drawImage(right, X, Y);
-//                }else {
-//                    gc.drawImage(right, X, Y);
-//                }
-//
-//            }
-//        }.start();
-//
-//        stage.show();
-//    }
-//
-//    public void generatemap(GraphicsContext graphicsContext){
-//
-//        graphicsContext.strokeRect(0, 0, 10, 50);
-//    }
-//
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//}
